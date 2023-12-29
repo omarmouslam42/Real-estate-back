@@ -6,12 +6,12 @@ import { sendEmail } from "../../../utlis/email.js";
 import userModel from "../../../../DB/model/auth.model.js";
 // FxjnoByqr5vLqGnW
 export const create = asyncHandler(async (req, res, next) => {
-    if (req.body.discountPrice) { 
+    if (req.body.discountPrice) {
         // console.log(req.body.discountPrice, req.body.regularPrice);
         if (Number(req.body.discountPrice) >= Number(req.body.regularPrice)) {
             return next(new ErrorClass("discountPrice must be less than regular", 400))
         }
-        req.body.regularPrice= Number(req.body.regularPrice-req.body.discountPrice)
+        req.body.regularPrice = Number(req.body.regularPrice - req.body.discountPrice)
         // console.log(req.body.regularPrice);
     }
     const listing = await listingModel.create({ ...req.body, createdBy: req.user._id })
@@ -46,6 +46,7 @@ export const deleteUserListing = asyncHandler(async (req, res, next) => {
 
 export const getListing = asyncHandler(async (req, res, next) => {
     const { id } = req.params;
+   
     const listing = await listingModel.findById(id).select('-createdAt -__v -updatedAt -_id')
     if (!listing) {
         return next(new ErrorClass("Not Found", 404))
@@ -70,7 +71,7 @@ export const updateListing = asyncHandler(async (req, res, next) => {
         if (Number(req.body.discountPrice) >= Number(req.body.regularPrice)) {
             return next(new ErrorClass("discountPrice must be less than regular", 400))
         }
-        req.body.regularPrice= Number(req.body.regularPrice-req.body.discountPrice)
+        req.body.regularPrice = Number(req.body.regularPrice - req.body.discountPrice)
 
     }
     const updatUser = await listingModel.updateOne({ _id: id }, req.body)
@@ -103,12 +104,12 @@ export const resiveEmail = asyncHandler(async (req, res, next) => {
     const { message } = req.body;
     const id = req.user._id
     const user = await userModel.findById(id).select("email userName")
-    if (!user) {        
+    if (!user) {
         return next(new ErrorClass("user is not found ", 404))
     }
     sendEmail({ from: user.email, name: user.userName, html: message })
     return res.status(200).json({ message: "Done" })
-}) 
+})
 
 
 
