@@ -6,10 +6,11 @@ import path from "path"
 import { fileURLToPath } from "url";
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 dotenv.config({ path: path.join(__dirname, '.env') })
-const app= express();
-const port= process.env.PORT || 5000
+const app = express();
+const port = process.env.PORT || 5000
 
 app.use(cors())
-
-initApp(app,express)
-app.listen(port,()=>{console.log(`Project is listening on ${port}`);})
+// "start": "node index.js",
+// "dev": "nodemon index.js",
+initApp(app, express)
+app.listen(port, () => { console.log(`Project is listening on ${port}`); })
