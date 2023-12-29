@@ -6,7 +6,7 @@ import listingRouter from "./modules/listing/listing.router.js"
 
 const initApp=(app,express)=>{
 app.use(express.json())
-app.get("/",()=>{
+app.get("/",(req,res,next)=>{
     return res.json({message:"Welcome to RaleEstate Company"})
 })
 
