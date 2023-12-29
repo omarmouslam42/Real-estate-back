@@ -13,6 +13,6 @@ router.get("/getListing/:id", auth(), getListing)
 router.put("/updateListing/:id", validation(val.UpdateListingVal), auth(), updateListing)
 router.get("/get", searchListing)
 router.get("/getById/:id", getListingById)
-router.post("/sendEmail", validation(val.messageVal),auth(), resiveEmail)
-
+router.post("/sendEmail", validation(val.messageVal), auth(), resiveEmail)
+router.get("/lol", (req, res, next) => { res.json({ message: "lol" }) })
 export default router
