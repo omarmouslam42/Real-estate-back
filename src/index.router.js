@@ -12,7 +12,7 @@ const initApp = (app, express) => {
     })
 
     app.use("/api/auth", auhtRouter)
-    app.use("/api/user", userRouter)
+    app.use("/api/user", userRouter) 
     app.use("/api/listing", listingRouter)
 
     app.all('*', (req, res, next) => {

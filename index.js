@@ -10,7 +10,6 @@ const app = express();
 const port = process.env.PORT || 5000
 
 app.use(cors())
-// "start": "node index.js",
-// "dev": "nodemon index.js",
+
 initApp(app, express)
 app.listen(port, () => { console.log(`Project is listening on ${port}`); })
