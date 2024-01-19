@@ -5,10 +5,18 @@ import { asyncHandler } from "../../../utlis/errorHandling.js";
 import { sendEmail } from "../../../utlis/email.js";
 import userModel from "../../../../DB/model/auth.model.js";
 // FxjnoByqr5vLqGnW
-
+export const searchListing = asyncHandler(async (req, res, next) => {
+    const apiFeatures = new ApiFeatures(listingModel.find(), req.query)
+        .pagination()
+        .sort()
+        .search();
+    const listing = await apiFeatures?.mongooseQuery
+    return res.status(200).json({ message: "Done", listing })
+}
+)
 export const getListing = asyncHandler(async (req, res, next) => {
     const { id } = req.params;
-   
+
     const listing = await listingModel.findById(id).select('-createdAt -__v -updatedAt -_id')
     if (!listing) {
         return next(new ErrorClass("Not Found", 404))
@@ -27,15 +35,6 @@ export const getUserListing = asyncHandler(async (req, res, next) => {
     return res.status(200).json({ message: "Done", listing })
 })
 
-export const searchListing = asyncHandler(async (req, res, next) => {
-    const apiFeatures = new ApiFeatures(listingModel.find(), req.query)
-        .pagination()
-        .sort()
-        .search();
-    const listing = await apiFeatures?.mongooseQuery
-    return res.status(200).json({ message: "Done", listing })
-}
-)
 
 export const getListingById = asyncHandler(async (req, res, next) => {
     const { id } = req.params
