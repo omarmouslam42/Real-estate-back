@@ -33,7 +33,6 @@ export const searchListing = asyncHandler(async (req, res, next) => {
         .sort()
         .search();
     const listing = await apiFeatures?.mongooseQuery
-    // console.log(listing);
     return res.status(200).json({ message: "Done", listing })
 }
 )

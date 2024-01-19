@@ -15,7 +15,7 @@ const initApp = (app, express) => {
     app.use("/api/user", userRouter) 
     app.use("/api/listing", listingRouter)
 
-    app.all('*', (req, res, next) => {
+    app.all('*', (req, res, next) => { 
         res.send("In-valid Routing Plz check url  or  method")
     })
 
