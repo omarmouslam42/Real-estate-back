@@ -6,13 +6,13 @@ import { validation } from "../../middleware/validation.js"
 
 const router = Router()
 
-router.get("/", searchListing)
+router.get("/get", searchListing)
 router.get("/userListing", auth(), getUserListing)
-router.get("/:id", auth(), getListing)
+router.get("/getlistingById/:id", auth(), getListing)
 router.get("/getById/:id", getListingById)
 router.post("/create", validation(val.createListingVal), auth(), create)
 router.delete("/deleteListing/:id", auth(), deleteUserListing)
 router.put("/updateListing/:id", validation(val.UpdateListingVal), auth(), updateListing)
 router.post("/sendEmail", validation(val.messageVal), auth(), resiveEmail)
 router.get("/lol", (req, res, next) => { res.json({ message: "lol" }) })
-export default router
+export default router 
