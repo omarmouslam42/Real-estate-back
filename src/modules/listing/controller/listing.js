@@ -10,12 +10,12 @@ export const searchListing = asyncHandler(async (req, res, next) => {
     const apiFeatures = new ApiFeatures(listingModel.find(), req.query)
         .pagination()
         .sort()
-        .search();
+        .search()
     const listing = await apiFeatures?.mongooseQuery
     console.log(listing);
     return res.status(200).json({ message: "Done", listing })
-}
-)
+} 
+) 
 
 
 export const getListing = asyncHandler(async (req, res, next) => {
